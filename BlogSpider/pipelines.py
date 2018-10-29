@@ -17,10 +17,10 @@ class BlogspiderPipeline(object):
 class SpiderResultPipeline(object):
     def __init__(self):
         dbargs = dict(
-            host='192.168.1.175',
-            db='platx_hunter',
-            user='root',
-            passwd='root',
+            host='',
+            db='',
+            user='',
+            passwd='',
             charset='utf8',
             cursorclass=MySQLdb.cursors.DictCursor,
             use_unicode=True,
