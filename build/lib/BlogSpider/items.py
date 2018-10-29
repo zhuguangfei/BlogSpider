@@ -12,3 +12,9 @@ class BlogspiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+
+
+class SpiderResult(scrapy.Item):
+    uuid = scrapy.Field()
+    result = scrapy.Field()
+    page = scrapy.Field()

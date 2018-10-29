@@ -56,9 +56,17 @@ ROBOTSTXT_OBEY = False
 # SPIDER_MIDDLEWARES = {
 #    'BlogSpider.middlewares.BlogspiderSpiderMiddleware': 543,
 # }
+params = dict()
+with open('.env') as r:
+    lines = r.read().split('\n')
+    for line in lines:
+        param = line.split('=')
+        params[param[0]] = param[-1]
+
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-REDIS_URL = 'redis://user:123456@192.168.1.111:6379'
+REDIS_URL = f'redis://{params.get("redis_user")}:{params.get("redis_passwd")}@{params.get("redis_ip")}:{params.get("redis_port")}'
+
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
@@ -77,9 +85,7 @@ REDIS_URL = 'redis://user:123456@192.168.1.111:6379'
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'BlogSpider.pipelines.BlogspiderPipeline': 300,
-# }
+ITEM_PIPELINES = {'BlogSpider.pipelines.SpiderResultPipeline': 300}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -95,7 +95,57 @@ def spiderByInterface():
     print(rsp.json())
 
 
+import MySQLdb
+
+
+def genText():
+    db = MySQLdb.connect(
+        "192.168.1.175", "root", "root", "platx_hunter", charset='utf8'
+    )
+
+    cursor = db.cursor()
+    cursor.execute("select result from spider_result where id=20")
+    data = cursor.fetchall()
+    with open('search.txt', 'wb') as w:
+        w.write(data[0][0])
+
+    db.close()
+
+
+def facebook():
+    cookies = {
+        "c_user": "100029290456102",
+        "datr": "-H_WW_vvhU8IH2ubTbyYADMb",
+        "fr": "16W3TC9aYo8AFQlDY.AWUzW6MsyDuCY3-wHZJqvksijWY.Bb1n_4.X_.AAA.0.0.Bb1oAN.AWUJwWkZ",
+        "noscript": "1",
+        "pl": "n",
+        "sb": "-H_WWyXh0g9_SuVepBzYCl9Z",
+        "xs": "31%3AV_DdtJ8izYpRfw%3A2%3A1540784141%3A-1%3A-1",
+    }
+    cookies_str = ""
+    for key in cookies.keys():
+        cookies_str = cookies_str + f'{key}={cookies.get(key)};'
+    headers = {"cookie": cookies_str}
+    print(headers)
+    rsp = requests.get(
+        url='https://mobile.facebook.com/graphsearch/str/trump+democrat/stories-keyword/stories-public',
+        headers=headers,
+    )
+    with open('facebook.txt', 'w', encoding='utf-8') as w:
+        print(rsp.text)
+        w.write(rsp.text)
+
+
+import re
+
 if __name__ == '__main__':
     # spider()
     # parse()
-    spiderByInterface()
+    # spiderByInterface()
+    # string = 's.weibo.com/weibo?q=%E5%B0%8F%E7%B1%B3&Refer=index&page1=42'
+    # pattern = re.compile(r'.*?page=(\d+)', flags=re.S)
+    # result = re.findall(pattern, string)
+    # print(result)
+    # genText()
+    # facebook()
+    
