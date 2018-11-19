@@ -1,3 +1,7 @@
 *.txt
 *.pyc
 .env
+.gitignore
+*.html
+build
+test.py

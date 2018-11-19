@@ -16,15 +16,7 @@ class BlogspiderPipeline(object):
 
 class SpiderResultPipeline(object):
     def __init__(self):
-        dbargs = dict(
-            host='',
-            db='',
-            user='',
-            passwd='',
-            charset='utf8',
-            cursorclass=MySQLdb.cursors.DictCursor,
-            use_unicode=True,
-        )
+        dbargs = dict()
         self.dbpool = adbapi.ConnectionPool('MySQLdb', **dbargs)
 
     def process_item(self, item, spider):
@@ -37,3 +29,40 @@ class SpiderResultPipeline(object):
             (item['uuid'], item['page'], item['result']),
         )
 
+
+class SpiderParseResultPipeline(object):
+    def __init__(self):
+        dbargs = dict()
+        self.dbpool = adbapi.ConnectionPool('MySQLdb', **dbargs)
+
+    def process_item(self, item, spider):
+        res = self.dbpool.runInteraction(self.insert_into_table, item)
+        return item
+
+    def insert_into_table(self, conn, item):
+        conn.execute(
+            'insert into spider_parse_result(uuid,type,url,content,nick_name) values(%s,%s,%s,%s,%s)',
+            (
+                item['uuid'],
+                item['type_'],
+                item['url'],
+                item['content'],
+                item['nickName'],
+            ),
+        )
+
+
+class SpiderCookiesPipeline(object):
+    def __init__(self):
+        dbargs = dict()
+        self.dbpool = adbapi.ConnectionPool('MySQLdb', **dbargs)
+
+    def process_item(self, item, spider):
+        res = self.dbpool.runInteraction(self.insert_into_table, item)
+        return item
+
+    def insert_into_table(self, conn, item):
+        conn.execute(
+            'update spider_cookies set cookies=%s,create_time=%s where username=%s and type=%s',
+            (item['cookies'], item['createTime'], item['username'], item['type_']),
+        )

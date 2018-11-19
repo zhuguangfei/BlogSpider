@@ -8,7 +8,7 @@ from BlogSpider.items import SpiderResult
 
 
 class SearchSpider(scrapy.Spider):
-    name = 'weibo_search'
+    name = 'weibo_search1'
     allowed_domains = ['s.weibo.com']
 
     def __init__(self, **kwargs):
@@ -19,22 +19,7 @@ class SearchSpider(scrapy.Spider):
         super(SearchSpider, self).__init__(**kwargs)
         self.start_urls = [f'https://s.weibo.com/weibo?q={q}&Refer={Refer}']
 
-        self.cookie = {
-            "SINAGLOBAL": "8799106871748.773.1522035051635",
-            "_s_tentry": "-",
-            "Apache": "6487313550452.507.1538111417825",
-            "ULV": "1538111417840:8:2:1:6487313550452.507.1538111417825:1536132862809",
-            "login_sid_t": "87904fbb2938efd3063a31bd49977843",
-            "appkey": "",
-            "SCF": "AowHr_zge6tslHhoJW0Hb2521LQOrM9Wh9ec-sUwywvL7sd3p_Gr4o1qG2d97GEki8Q-5mjGlxMRpoat0S9S-lM.",
-            "SUHB": "0xnyZVNxNrCIkY",
-            "un": "13552755384",
-            "SUB": "_2AkMsjatJdcPxrAVUn_sQxGrmZYlH-jyfWMK_An7uJhMyAxgv7lMrqSVutBF-XGUoRSU7hrGxOnFPx8oop4gG7SVN",
-            "SUBP": "0033WrSXqPxfM72wWs9jqgMF55529P9D9WFYF3eJlXxjg60nSbjicsBe5JpVF020SK-ES0-fe0nX",
-            "UOR": "www.pythontip.com,widget.weibo.com,login.sina.com.cn",
-            "cross_origin_proto": "SSL",
-            "WBStorage": "e8781eb7dee3fd7f|undefined",
-        }
+        self.cookie = {}
 
     def start_requests(self):
         requestList = []

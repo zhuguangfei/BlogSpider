@@ -1,26 +1,32 @@
 # -*- coding: utf-8 -*-
-import scrapy, re
+import scrapy, re, json
 from scrapy import Request
 from scrapy.selector import Selector
 from BlogSpider.util_pools import ipPools, userAgentPools, cookiePools
 from urllib.parse import quote
 from BlogSpider.items import SpiderResult
+from ..pipelines import SpiderResultPipeline
 
 
 class FaceBookSpider(scrapy.Spider):
     name = 'facebook_search'
     allowed_domains = ['mobile.facebook.com']
+    custom_settings = {
+        'ITEM_PIPELINES': {'BlogSpider.pipelines.SpiderResultPipeline': 1}
+    }
 
     def __init__(self, **kwargs):
         kwargs.pop('_job')
-        q = quote(kwargs.get('q'), 'trump')
+        q = quote(kwargs.get('q'), 'Buffett')
         self.uuid = kwargs.get('uuid', 1000)
+        paramCookie = kwargs.get('cookie')
         super(FaceBookSpider, self).__init__(**kwargs)
         self.start_urls = [
             f'https://mobile.facebook.com/graphsearch/str/{q}/stories-keyword/stories-public'
         ]
-
         self.cookie = {}
+        if paramCookie:
+            self.cookie = json.loads(paramCookie)
 
     def start_requests(self):
         requestList = []

@@ -155,38 +155,13 @@ class UserAgentPools(UserAgentMiddleware):
 
 class CookiePools(object):
     def __init__(self):
-        cookie = {
-            "SINAGLOBAL": "8799106871748.773.1522035051635",
-            "_s_tentry": "-",
-            "Apache": "6487313550452.507.1538111417825",
-            "ULV": "1538111417840:8:2:1:6487313550452.507.1538111417825:1536132862809",
-            "YF-Ugrow-G0": "169004153682ef91866609488943c77f",
-            "YF-V5-G0": "2a21d421b35f7075ad5265885eabb1e4",
-            "YF-Page-G0": "a1c00fe9e544064d664e61096bd4d187"
-            "login_sid_t=87904fbb2938efd3063a31bd49977843",
-            "appkey": "",
-            "WBtopGlobal_register_version": "9744cb1b8d390b27",
-            "UOR": "www.pythontip.com,widget.weibo.com,login.sina.com.cn",
-            "cross_origin_proto": "SSL",
-            "WBStorage": "e8781eb7dee3fd7f|undefined",
-            "wb_view_log": "1920*10801",
-            "SSOLoginState": "1540175477",
-            "SCF": "AowHr_zge6tslHhoJW0Hb2521LQOrM9Wh9ec-sUwywvLojFu38bWf_HkumtZ2AvL86w0KthBxS6tZXJeYU_e_fY.",
-            "SUB": "_2A252yUYqDeRhGeBL7FEU-C_IwjiIHXVVvzDirDV8PUNbmtBeLW_BkW9NRsphvRNLkkseVXb9q_fMKvA22Pr23n7n",
-            "SUBP": "0033WrSXqPxfM725Ws9jqgMF55529P9D9WFYF3eJlXxjg60nSbjicsBe5JpX5K2hUgL.FoqfS0ef1h2X1KB2dJLoI7DA9c9kP0qNehn0",
-            "SUHB": "0ftZbKY8KdxMJQ",
-            "ALF": "1571711477",
-            "un": "13552755384",
-            "wvr": "6",
-        }
-        cookies = []
-        cookies.append(cookie)
-        self.cookies = cookies
+        cookie = {}
+        # cookies = []
+        # cookies.append(cookie)
+        self.cookies = cookie
 
     def process_request(self, request, spider):
-        cookie = random.choice(self.cookies)
-        print('当前使用cookie')
         try:
-            request.cookies = cookie
+            request.cookies = self.cookies
         except Exception as e:
             print(e)

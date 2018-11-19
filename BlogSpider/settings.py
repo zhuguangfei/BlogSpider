@@ -32,7 +32,7 @@ ROBOTSTXT_OBEY = False
 # CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-# COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = False
@@ -56,26 +56,37 @@ ROBOTSTXT_OBEY = False
 # SPIDER_MIDDLEWARES = {
 #    'BlogSpider.middlewares.BlogspiderSpiderMiddleware': 543,
 # }
-params = dict()
-with open('.env') as r:
-    lines = r.read().split('\n')
-    for line in lines:
-        param = line.split('=')
-        params[param[0]] = param[-1]
+# params = dict()
+# with open('.env') as r:
+#     lines = r.read().split('\n')
+#     for line in lines:
+#         param = line.split('=')
+#         params[param[0]] = param[-1]
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
-DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-REDIS_URL = f'redis://{params.get("redis_user")}:{params.get("redis_passwd")}@{params.get("redis_ip")}:{params.get("redis_port")}'
+REDIS_START_URLS_KEY = '%(name)s:start_urls'
+# SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.PriorityQueue'
+# PriorityQueue（有序集合），FifoQueue（列表）、LifoQueue（列表）
+# SCHEDULER_QUEUE_KEY = '%(spider)s:requests'
+# SCHEDULER_SERIALIZER = "scrapy_redis.picklecompat"
+# SCHEDULER_PERSIST = True
+# SCHEDULER_FLUSH_ON_START = False
+# SCHEDULER_IDLE_BEFORE_CLOSE = 10
+# SCHEDULER_DUPEFILTER_KEY = '%(spider)s:dupefilter'
+# SCHEDULER_DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
+# REDIS_URL = f'redis://{params.get("redis_user")}:{params.get("redis_passwd")}@{params.get("redis_ip")}:{params.get("redis_port")}'
 
+REDIS_URL = 'redis://user:123456@192.168.1.111:6379'
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 123,
-#     'BlogSpider.middlewares.IpPools': 124,
-#     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 125,
-#     'BlogSpider.middlewares.UserAgentPools': 126,
-#     'BlogSpider.middlewares.CookiePools': 127,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    #     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 123,
+    #     'BlogSpider.middlewares.IpPools': 124,
+    #     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 125,
+    #     'BlogSpider.middlewares.UserAgentPools': 126,
+    'BlogSpider.middlewares.CookiePools': 127
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -85,7 +96,8 @@ REDIS_URL = f'redis://{params.get("redis_user")}:{params.get("redis_passwd")}@{p
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {'BlogSpider.pipelines.SpiderResultPipeline': 300}
+# ITEM_PIPELINES = {'BlogSpider.pipelines.SpiderResultPipeline': 300}
+ITEM_PIPELINES = {'scrapy_redis.pipelines.RedisPipeline': 100}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
