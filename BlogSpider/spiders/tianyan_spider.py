@@ -32,26 +32,7 @@ class TianYanSpider(scrapy.Spider):
 
     def __init__(self, **kwargs):
         # self.cookie = parseCookie()
-        self.cookie = {
-            "jsid": "SEM-BAIDU-CG-SY-000330",
-            "TYCID": "ab30714079aa11e88feae52895c72a51",
-            "undefined": "ab30714079aa11e88feae52895c72a51",
-            "ssuid": "7433374020",
-            "_ga": "GA1.2.1291040311.1535006407",
-            "aliyungf_tc": "AQAAAMytphaWYAMAwmfIfG7sdkxqUX25",
-            "csrfToken": "IqFb-NTH4qyaGoQLyZLHTU11",
-            "Hm_lvt_e92c8d65d92d534b0fc290df538b4758": "1542590207",
-            "_gid": "GA1.2.1901409875.1542590207",
-            "RTYCID": "f62c7dee46f546d5a68a3d16b15d0761",
-            "CT_TYCID": "ebf0091db9334cee96f2ab379d8e7cef",
-            "cloud_token": "6c01d61f860549f88eb36ee2eb52c33e",
-            "bannerFlag": "true",
-            "token": "8b5ca719a4e84502ad89d4912e8dbabd",
-            "_utm": "b9b201408e734b64bf14e2755143a929",
-            "tyc-user-info": "%257B%2522myQuestionCount%2522%253A%25220%2522%252C%2522integrity%2522%253A%25220%2525%2522%252C%2522state%2522%253A%25220%2522%252C%2522vipManager%2522%253A%25220%2522%252C%2522onum%2522%253A%25220%2522%252C%2522monitorUnreadCount%2522%253A%252278%2522%252C%2522discussCommendCount%2522%253A%25220%2522%252C%2522token%2522%253A%2522eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzU1Mjc1NTM4NCIsImlhdCI6MTU0MjU5MzEyMSwiZXhwIjoxNTU4MTQ1MTIxfQ.9-pM0eUv_MmZDIl6yWoc6t68F4ZzJbhYpgH5A4Aj7nIoPdu5Bg1vWnMUJTzyNloBYHTfVBoYjnBTZPZWs-qqQA%2522%252C%2522redPoint%2522%253A%25220%2522%252C%2522pleaseAnswerCount%2522%253A%25220%2522%252C%2522vnum%2522%253A%25220%2522%252C%2522bizCardUnread%2522%253A%25220%2522%252C%2522mobile%2522%253A%252213552755384%2522%257D",
-            "auth_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzU1Mjc1NTM4NCIsImlhdCI6MTU0MjU5MzEyMSwiZXhwIjoxNTU4MTQ1MTIxfQ.9-pM0eUv_MmZDIl6yWoc6t68F4ZzJbhYpgH5A4Aj7nIoPdu5Bg1vWnMUJTzyNloBYHTfVBoYjnBTZPZWs-qqQA",
-            "Hm_lpvt_e92c8d65d92d534b0fc290df538b4758": "1542596385",
-        }
+        self.cookie = {}
 
     def start_requests(self):
         return [

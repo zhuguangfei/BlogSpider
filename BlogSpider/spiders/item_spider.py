@@ -31,25 +31,7 @@ class HomeSpider(scrapy.Spider):
             # "proxy": ipPools(),
             "User-Agent": userAgentPools(),
         }
-        cookie = {
-            "SINAGLOBAL": "8799106871748.773.1522035051635",
-            "_s_tentry": "-",
-            "Apache": "6487313550452.507.1538111417825",
-            "ULV": "1538111417840:8:2:1:6487313550452.507.1538111417825:1536132862809",
-            "login_sid_t": "87904fbb2938efd3063a31bd49977843",
-            "YF-Ugrow-G0": "8fee13afa53da91ff99fc89cc7829b07",
-            "appkey": "",
-            "UOR": "www.pythontip.com,widget.weibo.com,login.sina.com.cn",
-            "cross_origin_proto": "SSL",
-            "SCF": "AowHr_zge6tslHhoJW0Hb2521LQOrM9Wh9ec-sUwywvLojFu38bWf_HkumtZ2AvL86w0KthBxS6tZXJeYU_e_fY.",
-            "SUB": "_2A252yUYqDeRhGeBL7FEU-C_IwjiIHXVVvzDirDV8PUNbmtBeLW_BkW9NRsphvRNLkkseVXb9q_fMKvA22Pr23n7n",
-            "SUBP": "0033WrSXqPxfM725Ws9jqgMF55529P9D9WFYF3eJlXxjg60nSbjicsBe5JpX5K2hUgL.FoqfS0ef1h2X1KB2dJLoI7DA9c9kP0qNehn0",
-            "SUHB": "0ftZbKY8KdxMJQ",
-            "ALF": "1571711477",
-            "un": "13552755384",
-            "wvr": "6",
-            "wb_view_log": "1920*10801",
-        }
+        cookie = {}
         requestList = []
         for url in self.start_urls:
             print(url)
